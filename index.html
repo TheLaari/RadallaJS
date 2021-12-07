@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+</head>
+
+<body cz-shortcut-listen="true">
+    <h1>RadallaJS</h1>>
+    <div id="map">
+    <p>Tämä sivu esittää Suomen rautatieliikennepaikat.</p>
+        
+    <div class="ol-viewport" style="position: relative; overflow: hidden; width: 100%; height: 100%; touch-action: none;" data-view="5">
+        
+    <canvas style="width: 100%; height: 100%; display: block;" class="ol-unselectable" width="942" height="258">
+    </canvas>
+        
+    <div class="ol-overlaycontainer"></div>
+    
+    <div class="ol-overlaycontainer-stopevent">
+        
+    <div class="ol-zoom ol-unselectable ol-control">
+        
+    <button class="ol-zoom-in" type="button" title="Zoom in">+</button>
+    
+    <button class="ol-zoom-out" type="button" title="Zoom out">−</button></div>
+    
+    <div class="ol-rotate ol-unselectable ol-control ol-hidden">
+    <button class="ol-rotate-reset" type="button" title="Reset rotation">
+    <span class="ol-compass" style="transform: rotate(0rad);">
+    </span>
+    </button>
+    </div>
+    <div class="ol-attribution ol-unselectable ol-control ol-uncollapsible">
+        <ul>
+            <li>© 
+                <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.
+            </li>
+        </ul>
+        <button type="button" title="Attributions">
+            </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+</body>
+
+<script>
+    var Kartta = new ol.Map({
+	target: 'map',
+	layers: [
+		new ol.layer.Tile({
+			source: new ol.source.OSM(),
+			opacity: 0.4
+		}),
+		new ol.layer.Vector({
+			source: new ol.source.Vector({
+				format: new ol.format.GeoJSON(),
+				url: 'https://rata.digitraffic.fi/infra-api/latest/rautatieliikennepaikat.geojson?srsName=crs:84'
+			})
+		})
+	],
+	view: new ol.View({
+		zoom: 6,
+		center: [3000000, 9000000]
+	})
+});
+</script>
+</html>
