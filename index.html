@@ -28,16 +28,6 @@
     <button class="ol-rotate-reset" type="button" title="Reset rotation">
     <span class="ol-compass" style="transform: rotate(0rad);">
     </span>
-    </button>
-    </div>
-    <div class="ol-attribution ol-unselectable ol-control ol-uncollapsible">
-        <ul>
-            <li>© 
-                <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.
-            </li>
-        </ul>
-        <button type="button" title="Attributions">
-            </button>
             </div>
         </div>
     </div>
@@ -46,5 +36,24 @@
     
 </body>
 
-<script src="/kartta.js"></script>
+<script>
+var Kartta = new ol.Map({
+	target: 'map',
+	layers: [
+		new ol.layer.Tile({
+			source: new ol.source.OSM(),
+		}),
+		new ol.layer.Vector({
+			source: new ol.source.Vector({
+				format: new ol.format.GeoJSON(),
+				url: 'https://rata.digitraffic.fi/infra-api/latest/rautatieliikennepaikat.geojson?srsName=crs:84'
+			})
+		})
+	],
+	view: new ol.View({
+		zoom: 5,
+		center: [3000000, 8500000]
+	})
+});
+</script>
 </html>
